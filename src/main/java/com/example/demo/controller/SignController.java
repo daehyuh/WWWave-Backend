@@ -42,7 +42,6 @@ public class SignController {
         return new ResponseEntity<Boolean>(memberService.updateNickname(request.getNickname(), authentication.getName()), HttpStatus.OK);
     }
 
-    // 자기소개, 태그 수정
     @Operation(operationId = "update", summary = "자기소개, 태그 수정", description = "요청을 검토한뒤 회원수정", tags = "SignController")
     @PostMapping("/updateMyself")
     public ResponseEntity<Boolean> update(@RequestBody SignRequest request, Authentication authentication) throws Exception {
