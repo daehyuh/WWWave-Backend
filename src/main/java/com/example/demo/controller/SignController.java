@@ -39,14 +39,14 @@ public class SignController {
     @PostMapping("/updateNick")
     public ResponseEntity<Boolean> updateNick(@RequestBody SignRequest request, Authentication authentication) throws Exception {
         System.out.println(authentication.getName());
-        return new ResponseEntity<Boolean>(memberService.updateNickname(request.getNickname(), authentication.getName()), HttpStatus.OK);
+        return new ResponseEntity<>(memberService.updateNickname(request.getNickname(), authentication.getName()), HttpStatus.OK);
     }
 
     @Operation(operationId = "update", summary = "자기소개, 태그 수정", description = "요청을 검토한뒤 회원수정", tags = "SignController")
     @PostMapping("/updateMyself")
     public ResponseEntity<Boolean> update(@RequestBody SignRequest request, Authentication authentication) throws Exception {
         System.out.println(authentication.getName());
-        return new ResponseEntity<Boolean>(memberService.updateMyselfAndHashtag(request.getHashtag(), request.getHashtag(), authentication.getName()), HttpStatus.OK);
+        return new ResponseEntity<>(memberService.updateMyselfAndHashtag(request.getHashtag(), request.getHashtag(), authentication.getName()), HttpStatus.OK);
     }
 
 }

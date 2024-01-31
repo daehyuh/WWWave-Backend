@@ -69,20 +69,29 @@ public class SignService {
     }
 
 
-    public boolean updateNickname(String nickname, String email) {
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("해당 닉네임이 존재하지 않습니다."));
-        member.setNickname(nickname);
-        memberRepository.save(member);
+    public boolean updateNickname(String nickname, String email) throws Exception {
+        try {
+            Member member = memberRepository.findByEmail(email)
+                    .orElseThrow(() -> new IllegalArgumentException("계정을 찾을 수 없습니다."));
+            member.setNickname(nickname);
+            memberRepository.save(member);
+        } catch (Exception e) {
+            throw new Exception("잘못된 요청입니다.");
+        }
         return true;
     }
 
-    public boolean updateMyselfAndHashtag(String myself, String hashtag, String name) {
-        Member member = memberRepository.findByEmail(name)
-                .orElseThrow(() -> new IllegalArgumentException("해당 닉네임이 존재하지 않습니다."));
-        member.setHashtag(myself);
-        member.setMyself(hashtag);
-        memberRepository.save(member);
+    public boolean updateMyselfAndHashtag(String myself, String hashtag, String name) throws Exception {
+        try {
+            Member member = memberRepository.findByEmail(name)
+                    .orElseThrow(() -> new IllegalArgumentException("계정을 찾을 수 없습니다."));
+            member.setHashtag(myself);
+            member.setMyself(hashtag);
+            memberRepository.save(member);
+        } catch (Exception e) {
+            throw new Exception("잘못된 요청입니다.");
+        }
+
         return true;
     }
 }
